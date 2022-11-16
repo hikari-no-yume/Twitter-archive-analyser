@@ -76,7 +76,7 @@ foreach (getJSON("following.js", $argv[1]) as $follow) {
 // Tweets file may be split into several parts (tweet.js, tweet-part1.js, etc)
 $handle = opendir($argv[1]);
 while (FALSE !== ($filename = readdir($handle))) {
-    if (0 === strpos($filename, "tweet")) {
+    if (0 === strpos($filename, "tweet") && ".js" === substr($filename, -3)) {
         foreach (getJSON($filename, $argv[1]) as $tweet) {
             $tweet = $tweet->tweet;
             $reply_to = $tweet->in_reply_to_user_id_str ?? NULL;
